@@ -27,6 +27,8 @@ SCRIPT_DIR=`dirname $LINK`
 
 COMMAND="rsync $RSYNC_OPTIONS --exclude=$RSYNC_EXCLUDE --delete $WATCH_DIR/ $SSH_USER@$SSH_HOST:$REMOTE_TARGET_DIR"
 
+# echo $COMMAND
+
 case $1 in
     start)
       if [ -e ${PIDFILE} ] && ( ps -p `cat $PIDFILE` > /dev/null ); then
@@ -70,7 +72,7 @@ case $1 in
     ;;
 
     run)
-      $COMMAND && echo Done.
+      eval "$COMMAND" && echo Done.
     ;;
 
     log)
